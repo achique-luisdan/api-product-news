@@ -3,12 +3,13 @@ const sequelize = require('../../libs/database');
 
 const Notice = sequelize.define('notices', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     primaryKey: true,
-    autoIncrement: true
   },
   title: {
     type: DataTypes.STRING,
+    unique: true,
+    allowNull: false
   },
   content: {
     type: DataTypes.STRING,

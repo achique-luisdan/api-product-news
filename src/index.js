@@ -14,7 +14,6 @@ app.use(cors());
 app.use(express.json());
 routes(app);
 
-
 async function main(){
   try {
     await sequelize.sync({force: false});
