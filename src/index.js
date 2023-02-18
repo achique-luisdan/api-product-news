@@ -1,13 +1,16 @@
 /**  @description Used CommonJS as Module System */
 const express  = require('express');
 const cors = require('cors');
+require('dotenv').config();
 const { v4: uuidv4 } = require ('uuid');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3000;
+
+const pathInitial = process.env.PATH_INITIAL || '/api';
 
 app.use(cors());
-app.use (express.json());
+app.use(express.json());
 
 let notices = [
   {
@@ -30,11 +33,11 @@ let notices = [
   },
 ];
 
-app.get('/api/notices', (req, res) => {
+app.get( pathInitial + '/notices', (req, res) => {
   res.json(notices);
 });
 
-app.get('/api/notices/:id', (req, res) => {
+app.get(pathInitial + '/notices/:id', (req, res) => {
   const id = req.params.id;
   const notice = notices.find( notice => notice.id === id);
   if (!notice) {
@@ -43,7 +46,7 @@ app.get('/api/notices/:id', (req, res) => {
   res.json(notice);
 });
 
-app.post('/api/notices', (req, res) => {
+app.post(pathInitial + '/notices', (req, res) => {
   const notice = req.body;
   if (!notice || !notice.title) {
     return res.status(400).json({ message: 'Title is missing' });
@@ -59,7 +62,7 @@ app.post('/api/notices', (req, res) => {
   res.status(201).json(noticeCreate);
 });
 
-app.delete ('/api/notices/:id', (req, res) => {
+app.delete (pathInitial + '/notices/:id', (req, res) => {
   const id = req.params.id;
   notices = notices.filter (notice => notice.id !== id);
   res.status(204).end();
