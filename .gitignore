@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+postgres_data/
+
+src-default/
+tmp/
+node_modules
+public

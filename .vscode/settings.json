@@ -2,6 +2,8 @@
     "cSpell.words": [
         "commitlint",
         "ecma",
+        "hstore",
+        "postgres",
         "uuidv"
     ]
 }
