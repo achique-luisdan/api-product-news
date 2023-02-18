@@ -1,10 +1,11 @@
 const { v4: uuidv4 } = require ('uuid');
 
 const Notice = require('../models/notice');
+const Category = require('../models/category');
 
 const readNotices = async (req, res) => {
   try {
-    const notices = await Notice.findAll();
+    const notices = await Notice.findAll({ include: Category});
     res.json(notices);
   } catch (err) {
     res.status(500).json({'message': err.message});
