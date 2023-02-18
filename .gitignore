@@ -104,3 +104,8 @@ dist
 .tern-port
 
 postgres_data/
+
+src-default/
+tmp/
+node_modules
+public
