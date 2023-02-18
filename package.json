@@ -1,0 +1,26 @@
+{
+  "name": "api-product-news",
+  "version": "1.0.0",
+  "description": "API REST de noticias 📰 o novedades de un producto digital🎁 valioso 💜",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achique-luisdan/api-product-news.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/achique-luisdan/api-product-news/issues"
+  },
+  "homepage": "https://github.com/achique-luisdan/api-product-news#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "husky": "^8.0.3"
+  }
+}
