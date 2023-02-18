@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_DB=product_news_db
+      - POSTGRES_USER=basic
+      - POSTGRES_PASSWORD=basic123
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=basic@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=basic
+    ports:
+      - 5050:80
+
+volumes:
+  postgres_data:
+    external: true
