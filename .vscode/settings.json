@@ -3,6 +3,7 @@
         "commitlint",
         "ecma",
         "hstore",
+        "mysqldata",
         "postgres",
         "uuidv"
     ]

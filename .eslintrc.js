@@ -8,12 +8,15 @@ module.exports ={
   ],
   'env': {
     'es6': true,
-    'node': true
+    'node': true,
+    'mocha': true
   },
   'rules': {
     'no-console': 'warn',
     'indent': ['error', 2],
     'quotes': ['error', 'single'],
-    'semi': ['error', 'always']
+    'semi': ['error', 'always'],
+    'max-len': ['warn', { 'code': 80, 'ignoreTemplateLiterals': true }],
+    'no-template-curly-in-string': 'error'
   }
 };
