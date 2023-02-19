@@ -3,31 +3,30 @@ const { v4: uuidv4 } = require ('uuid');
 const Notice = require('../models/notice');
 const Category = require('../models/category');
 
-const readNotices = async (req, res) => {
+async function readNotices(req, res) {
   try {
-    const notices = await Notice.findAll({ include: Category});
+    const notices = await Notice.findAll({ include: Category });
     res.json(notices);
   } catch (err) {
-    res.status(500).json({'message': err.message});
+    res.status(500).json({ 'message': err.message });
   }
-};
+}
 
-const createNotice = async (req, res) => {
+async function createNotice(req, res) {
   try {
-    const notice =  req.body;
+    const notice = req.body;
     if (!notice || !notice.title) {
       return res.status(400).json({ message: 'Title is missing' });
     }
-    const noticeCreated =  await Notice.create ({
+    const noticeCreated = await Notice.create({
       ...notice,
       id: uuidv4().slice(0, 6),
     });
-    res.send(noticeCreated);
     res.status(201).json(noticeCreated);
   } catch (err) {
-    if (err && err.errors && err.errors.length > 0){
-      err.errors = err.errors.map (error => {
-        const {message, path, value, type} = error;
+    if (err && err.errors && err.errors.length > 0) {
+      err.errors = err.errors.map(error => {
+        const { message, path, value, type } = error;
         return {
           tag: `TAG_${type.replace(/\s+/g, '_').toUpperCase()}`,
           message: `${message.charAt(0).toUpperCase()}${message.slice(1)}`,
@@ -36,14 +35,14 @@ const createNotice = async (req, res) => {
         };
       });
     }
-    res.status(500).json({'errors': err.errors});
+    res.status(500).json({ 'errors': err.errors });
   }
-};
+}
 
-const updateNotice = async (req, res) => {
+async function updateNotice(req, res) {
   try {
     const id = req.params.id;
-    const notice =  req.body;
+    const notice = req.body;
     if (!notice || !notice.title) {
       return res.status(400).json({ message: 'Title is missing' });
     }
@@ -51,13 +50,13 @@ const updateNotice = async (req, res) => {
     if (!noticeFound || !noticeFound.id) {
       return res.status(404).json({ message: 'Not found' });
     }
-    noticeFound.set (notice);
+    noticeFound.set(notice);
     const noticeUpdate = await noticeFound.save({ fields: ['title', 'content', 'imagen', 'categoryId'] });
     res.status(200).json(noticeUpdate);
   } catch (err) {
-    if (err && err.errors && err.errors.length > 0){
-      err.errors = err.errors.map (error => {
-        const {message, path, value, type} = error;
+    if (err && err.errors && err.errors.length > 0) {
+      err.errors = err.errors.map(error => {
+        const { message, path, value, type } = error;
         return {
           tag: `TAG_${type.replace(/\s+/g, '_').toUpperCase()}`,
           message: `${message.charAt(0).toUpperCase()}${message.slice(1)}`,
@@ -68,30 +67,30 @@ const updateNotice = async (req, res) => {
     } if (err && err.name && err.original.detail) {
       const error = {
         tag: `TAG${err.name.replace(/[A-Z]/g, letter => `_${letter}`).toUpperCase().replace('_SEQUELIZE', '')}`,
-        message:  err.original.detail,
+        message: err.original.detail,
         field: 'categoryId',
         value: req.body.categoryId
       };
-      res.status(500).json({'errors': [error]});
+      res.status(500).json({ 'errors': [error] });
     }
-    res.status(500).json({'errors': err.errors});
+    res.status(500).json({ 'errors': err.errors });
   }
-};
+}
 
-const deleteNotice = async (req, res) => {
+async function deleteNotice(req, res) {
   try {
     const id = req.params.id;
     const rowsDeleted = await Notice.destroy({ where: { id: id } });
-    if (rowsDeleted > 0){
+    if (rowsDeleted > 0) {
       res.status(204).end();
     }
     else {
       return res.status(404).json({ message: 'Not found' });
     }
   } catch (err) {
-    if (err && err.errors && err.errors.length > 0){
-      err.errors = err.errors.map (error => {
-        const {message, path, value, type} = error;
+    if (err && err.errors && err.errors.length > 0) {
+      err.errors = err.errors.map(error => {
+        const { message, path, value, type } = error;
         return {
           tag: `TAG_${type.replace(/\s+/g, '_').toUpperCase()}`,
           message: `${message.charAt(0).toUpperCase()}${message.slice(1)}`,
@@ -100,9 +99,9 @@ const deleteNotice = async (req, res) => {
         };
       });
     }
-    res.status(500).json({'errors': err.errors});
+    res.status(500).json({ 'errors': err.errors });
   }
-};
+}
 
 // Additional methods
 
