@@ -8,7 +8,8 @@
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "lint": "eslint src/*.js",
-    "lint:fix": "eslint src/*.js --fix"
+    "lint:fix": "eslint src/*.js --fix",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -24,12 +25,15 @@
   "devDependencies": {
     "@commitlint/cli": "17.4.4",
     "@commitlint/config-conventional": "17.4.4",
+    "chai": "4.3.7",
     "eslint": "8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "8.0.3",
+    "mocha": "10.2.0",
     "nodemon": "2.0.20",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "supertest": "6.3.3"
   },
   "dependencies": {
     "cors": "2.8.5",

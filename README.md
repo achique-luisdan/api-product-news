@@ -17,3 +17,15 @@ nvm use v14.20.1
 
 nvm list
 ```
+
+### Paso 3. Configurar MySQL
+
+> ** Levantar docker container
+
+```bash
+docker-compose -f "docker-compose.yml" up -d mysql
+```
+
+```bash
+docker volume create mysqldata
+```
