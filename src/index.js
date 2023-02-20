@@ -1,9 +1,7 @@
-/**  @description Used CommonJS as Module System */
-
 const app = require('./app');
 
-const { configs } = require('../configs/configs');
-const sequelize = require('../configs/database');
+const { configs } = require('./configs/configs');
+const sequelize = require('./configs/database');
 
 const port = configs.port;
 

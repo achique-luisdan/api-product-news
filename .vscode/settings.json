@@ -3,6 +3,7 @@
         "commitlint",
         "ecma",
         "hstore",
+        "middlewares",
         "Middlewares",
         "mysqldata",
         "postgres",

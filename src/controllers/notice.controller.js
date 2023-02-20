@@ -51,7 +51,9 @@ async function updateNotice(req, res) {
       return res.status(404).json({ message: 'Not found' });
     }
     noticeFound.set(notice);
-    const noticeUpdate = await noticeFound.save({ fields: ['title', 'content', 'imagen', 'categoryId'] });
+    const noticeUpdate = await noticeFound.save({
+      fields: ['title', 'content', 'imagen', 'categoryId']
+    });
     res.status(200).json(noticeUpdate);
   } catch (err) {
     if (err && err.errors && err.errors.length > 0) {
@@ -118,4 +120,10 @@ const readNoticeById = async (req, res) => {
   }
 };
 
-module.exports = { readNotices, createNotice, updateNotice, deleteNotice, readNoticeById };
+module.exports = {
+  readNotices,
+  createNotice,
+  updateNotice,
+  deleteNotice,
+  readNoticeById
+};

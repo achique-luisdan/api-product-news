@@ -17,6 +17,7 @@ module.exports ={
     'quotes': ['error', 'single'],
     'semi': ['error', 'always'],
     'max-len': ['warn', { 'code': 80, 'ignoreTemplateLiterals': true }],
-    'no-template-curly-in-string': 'error'
+    'no-template-curly-in-string': 'error',
+    'no-unused-vars': 'warn'
   }
 };
