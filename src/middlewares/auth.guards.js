@@ -1,5 +1,6 @@
-const { configs } = require('../configs/configs');
 const jwt = require('jsonwebtoken');
+
+const { configs } = require('../configs/configs');
 
 async function restrictAccess (err, req, res, next) {
   if (err){
@@ -14,6 +15,7 @@ async function continueAccess (req, res, next) {
     const user = req.user;
     const payload = {
       sub: user.id,
+      sessionId: user.sessionId
     };
     const token = jwt.sign(payload, configs.secret);
     res.json({ id: user.id, token});

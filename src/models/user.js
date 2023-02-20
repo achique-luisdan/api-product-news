@@ -17,7 +17,12 @@ const User = sequelize.define('users', {
   password: {
     type: DataTypes.STRING,
     allowNull: false
-  }
+  },
+  sessionId: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: true,
+  },
 },  {
   timestamps: true
 });
