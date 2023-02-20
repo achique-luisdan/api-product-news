@@ -1,6 +1,7 @@
 const { Strategy } = require('passport-local');
 const { findByEmail } = require('../../users.service');
 const bcrypt = require('bcrypt');
+const { setSession} = require('../../users.service');
 
 const LocalStrategy = new Strategy({
   usernameField: 'email',
@@ -15,8 +16,9 @@ const LocalStrategy = new Strategy({
     if (!isMatch) {
       throw { message: 'Invalid password' };
     }
-    const { id } =  userFound.dataValues;
-    done(null, { id, email });
+    const userSession = await setSession(userFound);
+    const { id, sessionId } =  userSession.dataValues;
+    done(null, { id, email, sessionId });
   } catch (err) {
     return done(err, false);
   }

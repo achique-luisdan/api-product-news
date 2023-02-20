@@ -1,5 +1,6 @@
 
 const User = require('../models/user');
+const { v4: uuidv4 } = require ('uuid');
 
 async function registerUser(req, res) {
   try {
@@ -43,7 +44,42 @@ async function findByEmail(email) {
   return userFound;
 }
 
+async function setSession(user) {
+  const userSession = user;
+  userSession.set ({
+    ...user.dataValues,
+    sessionId: uuidv4()
+  });
+  const userFound = await userSession.save({
+    fields: ['sessionId' ]
+  });
+  return userFound;
+}
+
+async function finishSession(userId) {
+  const userSession = await User.findByPk(userId);
+  userSession.set ({
+    ...userSession.dataValues,
+    sessionId: null
+  });
+  const sessionFinish = await userSession.save({
+    fields: ['sessionId' ]
+  });
+  return sessionFinish;
+}
+
+
+async function isSessionActivated(sessionId) {
+  const userFound = await User.findOne({
+    where: { sessionId }
+  });
+  return userFound && userFound.id && userFound.sessionId;
+}
+
 module.exports = {
   registerUser,
-  findByEmail
+  findByEmail,
+  setSession,
+  finishSession,
+  isSessionActivated
 };
