@@ -56,6 +56,19 @@ async function setSession(user) {
   return userFound;
 }
 
+async function finishSession(userId) {
+  const userSession = await User.findByPk(userId);
+  userSession.set ({
+    ...userSession.dataValues,
+    sessionId: null
+  });
+  const sessionFinish = await userSession.save({
+    fields: ['sessionId' ]
+  });
+  return sessionFinish;
+}
+
+
 async function isSessionActivated(sessionId) {
   const userFound = await User.findOne({
     where: { sessionId }
@@ -67,5 +80,6 @@ module.exports = {
   registerUser,
   findByEmail,
   setSession,
+  finishSession,
   isSessionActivated
 };

@@ -11,6 +11,8 @@ const configs = {
   dbPort: process.env.DB_PORT,
   apiKey: process.env.API_KEY,
   secret: process.env.SECRET_KEY,
+  secretSession: process.env.SECRET_SESSION,
+  sessionTimeout: process.env.SESSION_TIMEOUT,
 };
 
 module.exports = { configs };

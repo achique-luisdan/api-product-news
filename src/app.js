@@ -2,6 +2,7 @@
 const express  = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const session = require('express-session');
 
 const { configs } = require('./configs/configs');
 const categoriesRoutes = require('./routes/categories.routes');
@@ -15,6 +16,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
+app.use(session({
+  secret: configs.secretSession,
+  cookie: { maxAge: Number (configs.sessionTimeout) }
+}));
 
 require('./controllers/auth');
 
