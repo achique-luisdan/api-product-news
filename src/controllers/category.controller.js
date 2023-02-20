@@ -53,7 +53,9 @@ async function updateCategory(req, res) {
     }
     categoryFound.name = category.name;
     categoryFound.description = category.description;
-    const categoryUpdate = await categoryFound.save({ fields: ['name', 'description'] });
+    const categoryUpdate = await categoryFound.save({
+      fields: ['name', 'description'] }
+    );
     res.status(200).json(categoryUpdate);
   } catch (err) {
     if (err && err.errors && err.errors.length > 0) {
@@ -93,7 +95,7 @@ async function deleteCategory(req, res) {
         };
       });
     }
-    res.status(500).json({ 'errors': err.errors });
+    res.status(400).json({ 'errors': err.errors });
   }
 }
 
@@ -112,4 +114,10 @@ async function readCategoryById(req, res) {
   }
 }
 
-module.exports = { readCategories, createCategory, updateCategory, deleteCategory, readCategoryById };
+module.exports = {
+  readCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+  readCategoryById
+};
