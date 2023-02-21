@@ -4,7 +4,9 @@ const Category = require('../models/category');
 
 async function readCategories(req, res) {
   try {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({
+      attributes: ['id', 'name', 'description']
+    });
     res.json(categories);
   } catch (err) {
     res.status(500).json({ 'message': err.message });
