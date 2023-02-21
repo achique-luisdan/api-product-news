@@ -8,12 +8,15 @@ const {
   deleteNotice,
   readNoticeById
 } = require('../controllers/notice.controller');
+const { validateSessionTime } = require('../middlewares/auth.guards');
 
 const router = express.Router ();
 
-router.use(passport.authenticate('jwt', {session: false}));
-
 router.get('/', readNotices);
+
+router.use(passport.authenticate('jwt', {session: false}));
+router.use(validateSessionTime);
+
 router.post('/', createNotice);
 router.put('/:id', updateNotice);
 router.delete('/:id', deleteNotice);
