@@ -15,7 +15,7 @@ const options = {
     servers: [
       {
         url: pathInitial,
-        description: 'Development server'
+        description: `${configs.env} Server`.toUpperCase()
       },
     ],
     components:{
