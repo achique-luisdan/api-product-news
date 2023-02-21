@@ -14,7 +14,7 @@ const router = express.Router ();
 
 /**
  * @swagger
- * /api/categories:
+ * /categories:
  *   get:
  *     tags:
  *      - Categories

@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 const path = require('path');
+const { configs } = require('./configs');
+const pathInitial = configs.pathInitial;
 
 const options = {
   definition: {
@@ -8,16 +10,14 @@ const options = {
       title: 'API REST Valuable Product News 💜',
       description: 'Noticias o novedades de un producto digital valioso 💜',
       version: '1.0.0',
-      servers: [
-        {
-          url: 'http://localhost:3000',
-          description: 'Development server'
-        },
-      ],
+
     },
-    requestSnippets: {
-      languages: 'javascript'
-    },
+    servers: [
+      {
+        url: pathInitial,
+        description: 'Development server'
+      },
+    ],
     components:{
       securitySchemes:{
         bearerAuth:{
